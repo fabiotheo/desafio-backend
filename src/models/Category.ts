@@ -1,10 +1,17 @@
-class Category {
-  id: string;
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('categories')
+class Category {
+  @PrimaryGeneratedColumn('uuid')
+  id: 'uuid';
+
+  @Column()
   title: string;
 
+  @Column()
   created_at: Date;
 
+  @Column()
   updated_at: Date;
 }
 
