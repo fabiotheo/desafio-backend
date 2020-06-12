@@ -29,6 +29,11 @@ export class CreateTransaction1591838907033 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'category_id',
+            type: 'uuid',
+            isNullable: false,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
