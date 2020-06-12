@@ -22,7 +22,7 @@ class ImportTransactionsService {
       const { title, type, value, category } = item;
 
       // eslint-disable-next-line no-await-in-loop
-      const transaction = await createTransactionService.execute({
+      const transaction: any = await createTransactionService.execute({
         title,
         type,
         value: Number.parseFloat(value),
