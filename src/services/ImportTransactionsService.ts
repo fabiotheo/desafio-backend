@@ -11,25 +11,26 @@ interface Request {
 
 class ImportTransactionsService {
   async execute({ filename }: Request): Promise<Transaction[]> {
-    const createTransacttionService = new CreateTransactionService();
+    const createTransactionService = new CreateTransactionService();
     const filePath = path.join(uploadConfig.directory, filename);
     const csvJson = await csv().fromFile(filePath);
 
     await fs.promises.unlink(filePath);
 
     const transactions: Transaction[] = [];
-    csvJson.map(async item => {
+    for (const item of csvJson) {
       const { title, type, value, category } = item;
 
-      const transaction = await createTransacttionService.execute({
+      // eslint-disable-next-line no-await-in-loop
+      const transaction = await createTransactionService.execute({
         title,
         type,
         value: Number.parseFloat(value),
         category,
       });
-      // @ts-ignore
+
       transactions.push(transaction);
-    });
+    }
     return transactions;
   }
 }
